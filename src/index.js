@@ -6,40 +6,24 @@ import Customer from '../src/Customer.js';
 import Booking from '../src/Booking.js';
 
 // Fetch Data
-function getUsers() {
-  const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users";
-  const promise = fetch(url)
-    .then(users => users.json())
-    .catch(err => console.log(err));
+let users, rooms, bookings, roomServices;
 
-  return promise;
-}
+fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
+  .then(data => data.json())
+  .then(data => users = data.users)
+  .catch(err => console.log('Unable to fetch data', err));
 
-console.log(getUsers())
+fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
+  .then(data => data.json())
+  .then(data => rooms = data.rooms)
+  .catch(err => console.log('Unable to fetch data', err));
 
-function getRooms() {
-  const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms";
-  const promise = fetch(url)
-    .then(rooms => rooms.json())
-    .catch(err => console.log(err));
+fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+  .then(data => data.json())
+  .then(data => bookings = data.bookings)
+  .catch(err => console.log('Unable to fetch data', err));
 
-  return promise;
-}
-
-function getBookings() {
-  const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings";
-  const promise = fetch(url)
-    .then(bookings => bookings.json())
-    .catch(err => console.log(err));
-
-  return promise;
-}
-
-function getRoomServices() {
-  const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices";
-  const promise = fetch(url)
-    .then(roomServices => roomServices.json())
-    .catch(err => console.log(err));
-
-  return promise;
-}
+fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
+  .then(data => data.json())
+  .then(data => roomServices = data.roomServices)
+  .catch(err => console.log('Unable to fetch data', err));
