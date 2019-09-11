@@ -32,6 +32,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "datejs": "^1.0.0-rc3",
     "jquery": "^3.4.1"
   }
 }
