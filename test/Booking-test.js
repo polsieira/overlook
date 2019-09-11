@@ -2,6 +2,7 @@ import chai from 'chai';
 const expect = chai.expect;
 import spies from 'chai-spies';
 chai.use(spies);
+
 import Booking from '../src/Hotel.js';
 
 describe('Booking', () => {
