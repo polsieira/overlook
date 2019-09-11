@@ -1,11 +1,45 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+import Hotel from '../src/Hotel.js';
+import Customer from '../src/Customer.js';
+import Booking from '../src/Booking.js';
+
+// Fetch Data
+function getUsers() {
+  const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users";
+  const promise = fetch(url)
+    .then(users => users.json())
+    .catch(err => console.log(err));
+
+  return promise;
+}
+
+console.log(getUsers())
+
+function getRooms() {
+  const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms";
+  const promise = fetch(url)
+    .then(rooms => rooms.json())
+    .catch(err => console.log(err));
+
+  return promise;
+}
+
+function getBookings() {
+  const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings";
+  const promise = fetch(url)
+    .then(bookings => bookings.json())
+    .catch(err => console.log(err));
+
+  return promise;
+}
+
+function getRoomServices() {
+  const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices";
+  const promise = fetch(url)
+    .then(roomServices => roomServices.json())
+    .catch(err => console.log(err));
+
+  return promise;
+}
