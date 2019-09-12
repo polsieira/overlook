@@ -68,8 +68,9 @@ function updateMainTab(date) {
 }
 
 // Select customer
-$('.search-results').on('click', function (event) {
-  domUpdates.updateCurrentCustomer(event.target.innerText)
+$('.search-results').on('click', (event) => {
+  domUpdates.updateCurrentCustomer(event.target.innerText);
+  hotel.getCurrentCustomer(event.target.innerText)
 });
 
 // Search functionality
@@ -86,11 +87,14 @@ $('.button--add').on('click', () => {
   let lastName = $('.last-name').val();
   let newName = `${firstName} ${lastName}`;
   let newID = customers.length + 1;
-  customers.push({
+  hotel.customers.push({
     id: newID,
     name: newName
   });
-  domUpdates.addCustomers(customers);
+  domUpdates.addCustomers(hotel.customers);
   domUpdates.clearInputs(['.first-name', '.last-name']);
-  domUpdates.updateCurrentCustomer(`${lastName}, ${firstName}`)
+  domUpdates.updateCurrentCustomer(`${lastName}, ${firstName}`);
+  hotel.currentCustomer = hotel.customers.find(customer => {
+    return customer.id === newID;
+  })
 });

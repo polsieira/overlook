@@ -4,6 +4,7 @@ class Hotel {
     this.rooms = rooms;
     this.bookings = bookings;
     this.roomServices = roomServices;
+    this.currentCustomer = null;
   }
 
   returnTodaysDate() {
@@ -14,6 +15,13 @@ class Hotel {
 
     today = `${yyyy}/${mm}/${dd}`;
     return today;
+  }
+
+  getCurrentCustomer(name) {
+    name = `${name.split(', ')[1]} ${name.split(',')[0]}`;
+    this.currentCustomer = this.customers.find(customer => {
+      return customer.name.includes(name);
+    });
   }
 
   findRoomsBooked(date) {
