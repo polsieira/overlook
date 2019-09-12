@@ -67,3 +67,15 @@ function updateMainTab(date) {
   domUpdates.updateDOMtext('.info--percent-occupied',
     `${hotel.returnPercentageOfRoomsOccupied(date)}%`);
 }
+
+$('.customer-name').on('click', function (event) {
+  let _this = this;
+  console.log(_this);
+});
+
+$('.input--search').on('keyup', (event) => {
+  let filteredCustomers = customers.filter(customer => {
+    return customer.name.toUpperCase().includes(event.target.value.toUpperCase());
+  });
+  domUpdates.addCustomers(filteredCustomers);
+});

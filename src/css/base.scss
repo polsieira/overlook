@@ -55,10 +55,10 @@ a {
   padding: 10px 0;
   text-align: center;
   text-decoration: none;
-}
 
-a:hover {
-  color: #ff7b29;
+  &:hover {
+    color: #ff7b29;
+  }
 }
 
 .tab-active a {
@@ -130,15 +130,15 @@ a:hover {
 .input--search,
 .input--add {
   border: 2px solid #CECFD4;
-  border-right: none;
   font-size: 18px;
   height: 40px;
   padding: 5px 10px;
   width: 80%;
+
   &:focus {
-     outline: none !important;
-     border-color: #3AD1B3;
-     box-shadow: 0 0 10px #719ECE;
+    outline: none !important;
+    border-color: #3AD1B3;
+    box-shadow: 0 0 10px #719ECE;
   }
 }
 
@@ -146,9 +146,13 @@ a:hover {
 .button--add {
   background: linear-gradient(141deg, white 0%, #CECFD4 51%, #CECFD4 75%);
   border: 2px solid #CECFD4;
+  border-left: none;
   height: 40px;
   padding: 5px;
   width: 40px;
+  &:focus {
+    outline: none !important;
+  }
 }
 
 .img--search,
@@ -167,11 +171,20 @@ a:hover {
 }
 
 .customer-name {
-  border-bottom: 1px solid #CECFD4; 
+  border-bottom: 1px solid #CECFD4;
   border-top: 1px solid #CECFD4;
+  cursor: pointer;
   display: block;
   font-size: 18px;
   padding: 10px 5px;
   width: 100%;
 
+  &:hover {
+    background: rgb(211, 211, 211);
+  }
+
+  &:active {
+    background: rgb(189, 189, 189);
+    color: #fff;
+  }
 }

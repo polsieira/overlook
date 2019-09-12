@@ -40,8 +40,9 @@ export default {
     });
     let html = '';
     customers.forEach(customer => {
-      html += `<span class="customer-name">${customer.name}</span>`
+      html += `<span class="customer-name">${customer.name.split(' ')[1]}, ${customer.name.split(' ')[0]}</span>`
     });
     $('.search-results').html(html);
   }
+
 }
