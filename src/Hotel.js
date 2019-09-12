@@ -1,9 +1,9 @@
 class Hotel {
-  constructor(customers, rooms, bookings, roomServices) {
-    this.customers = customers;
-    this.rooms = rooms;
-    this.bookings = bookings;
-    this.roomServices = roomServices;
+  constructor(data) {
+    this.customers = data.customers;
+    this.rooms = data.rooms;
+    this.bookings = data.bookings;
+    this.roomServices = data.roomServices;
     this.currentCustomer = null;
   }
 
