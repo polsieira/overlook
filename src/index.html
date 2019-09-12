@@ -18,18 +18,45 @@
       <li><a href="#customer">Customer</a></li>
     </ul>
     <div class="tabs-stage">
-      <div id="main">
-        <p>Here is where we would display the main!!</p>
-      </div>
-      <div id="orders">
+      <section id="main">
+        <div class="info">
+          <p>Rooms Avaliable:</p>
+          <p class="info--rooms-avaliable"></p>
+        </div>
+        <div class="info">
+          <p>Total Revenue:</p>
+          <p class="info--total-revenue"></p>
+        </div>
+        <div class="info">
+          <p>Percent Occupied:</p>
+          <p class="info--percent-occupied"></p>
+        </div>
+      </section>
+      <section id="orders">
         <p>Here is where we would display the order!!</p>
-      </div>
-      <div id="rooms">
+      </section>
+      <section id="rooms">
         <p>Here is where we would display the rooms!!</p>
-      </div>
-      <div id="customer">
-        <p>Here is where we would display the customer!!</p>
-      </div>
+      </section>
+      <section id="customer">
+        <div class="input-container">
+          <div class="search-container">
+            <input type="text" class="input--search" placeholder="Who are you looking for?">
+            <button type="submit" class="button--search">
+              <img class="img img--search" src="./images/searching-magnifying-glass.svg" alt="search icon">
+            </button>
+          </div>
+          <div class="add-container">
+            <input type="text" class="input--add" placeholder="Add new guest">
+            <button type="submit" class="button--add">
+              <img class="img img--add" src="./images/plus.svg" alt="plus icon">
+            </button>
+          </div>
+        </div>
+        <div class="search-results">
+
+        </div>
+      </section>
     </div>
   </div>
 </body>

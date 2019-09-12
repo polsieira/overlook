@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   background: #cecfd5;
   color: #666;
@@ -68,8 +74,104 @@ a:hover {
   border-radius: 0 0 6px 6px;
   border-top: 0;
   clear: both;
+  display: flex;
   min-height: 500px;
   padding: 24px 30px;
   position: relative;
   top: -1px;
+
+  section {
+    width: 100%;
+  }
+
+  p {
+    font-size: 18px;
+    margin: 0px 0px 10px 0px;
+  }
+}
+
+.info {
+  background: #cecfd5;
+  box-shadow: 1px 1px #c2c2c4;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.info--rooms-avaliable,
+.info--total-revenue,
+.info--percent-occupied {
+  font-size: 30px !important;
+  font-weight: 700;
+}
+
+#customer {
+  display: flex;
+}
+
+.input-container {
+  display: block;
+  width: 50%;
+}
+
+.search-container,
+.add-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.input--search,
+.input--add {
+  border: 2px solid #CECFD4;
+  border-right: none;
+  font-size: 18px;
+  height: 40px;
+  padding: 5px 10px;
+  width: 80%;
+  &:focus {
+     outline: none !important;
+     border-color: #3AD1B3;
+     box-shadow: 0 0 10px #719ECE;
+  }
+}
+
+.button--search,
+.button--add {
+  background: linear-gradient(141deg, white 0%, #CECFD4 51%, #CECFD4 75%);
+  border: 2px solid #CECFD4;
+  height: 40px;
+  padding: 5px;
+  width: 40px;
+}
+
+.img--search,
+.img--add {
+  height: 20px;
+  width: 20px;
+}
+
+.search-results {
+  background: #faf9f9;
+  border: 2px solid #CECFD4;
+  display: block;
+  height: 400px;
+  overflow: scroll;
+  width: 90%;
+}
+
+.customer-name {
+  border-bottom: 1px solid #CECFD4; 
+  border-top: 1px solid #CECFD4;
+  display: block;
+  font-size: 18px;
+  padding: 10px 5px;
+  width: 100%;
+
 }
