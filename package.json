@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "datejs": "^1.0.0-rc3",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "jquery-ui-bundle": "^1.12.1-migrate"
   }
 }

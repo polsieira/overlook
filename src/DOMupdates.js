@@ -7,6 +7,12 @@ export default {
     $('.todays-date').text(date);
   },
 
+  updateCalendar() {
+    $(function () {
+      $("#datepicker").datepicker();
+    });
+  },
+
   updateCurrentCustomer(customerName) {
     $('.current-customer').text(`Guest: ${customerName}`);
   },
@@ -57,5 +63,27 @@ export default {
       });
     }
     $('.search-results').html(html);
+  },
+
+  addRoomServices(roomServices) {
+    let html = '';
+    if (roomServices.length < 1) {
+      html += `<span class="no-search-results">No orders found...</span>`
+    } else {
+      roomServices.sort((orderA, orderB) => {
+        let A = orderA.date.split('/').join();
+        let B = orderB.date.split('/').join();
+        return B > A ? 1 : B < A ? -1 : 0;
+      });
+      roomServices.forEach(order => {
+        html += `<span class="order">
+        <div>${order.date}</div>
+        <div>Guest Number: ${order.userID}</div>
+        <div>${order.food}</div>
+        <div>$${order.totalCost}</div>
+        </span>`
+      });
+    }
+    $('.order-results').html(html);
   }
 }

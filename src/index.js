@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import 'jquery-ui-bundle';
 import './css/base.scss';
 import './images/logo.png'
 import './images/searching-magnifying-glass.svg'
@@ -40,7 +41,10 @@ Promise.all([apiRequest1, apiRequest2, apiRequest3, apiRequest4])
     data["roomServices"] = values[3].roomServices;
     return data;
   })
-  .then(() => domUpdates.addCustomers(data.customers))
+  .then(() => {
+    domUpdates.addCustomers(data.customers);
+    domUpdates.addRoomServices(data.roomServices);
+  })
   .then(() => start());
 
 // Show the first tab by default
@@ -56,6 +60,7 @@ function start() {
   instantiateHotel();
   let today = hotel.returnTodaysDate();
   domUpdates.updateDate();
+  domUpdates.updateCalendar();
   updateMainTab(today);
 }
 

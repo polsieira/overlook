@@ -32,5 +32,4 @@ describe('Customer', () => {
 
   });
 
-  it('should book a room')
 });

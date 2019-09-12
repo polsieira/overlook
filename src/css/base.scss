@@ -192,13 +192,18 @@ a {
   width: 20px;
 }
 
-.search-results {
+.search-results,
+.order-results {
   background: #faf9f9;
   border: 2px solid #CECFD4;
   display: block;
   height: 450px;
   overflow: scroll;
   width: 90%;
+}
+
+.order-results {
+  width: 100%;
 }
 
 .customer-name {
@@ -218,4 +223,14 @@ a {
     background: rgb(189, 189, 189);
     color: #fff;
   }
+
+}
+
+.order {
+  border-bottom: 1px solid #CECFD4;
+  border-top: 1px solid #CECFD4;
+  display: block;
+  font-size: 18px;
+  padding: 10px 5px;
+  width: 100%;
 }
