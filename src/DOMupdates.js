@@ -4,7 +4,11 @@ export default {
 
   updateDate() {
     let date = new Date(Date.now())
-    $('.todaysDate').text(date);
+    $('.todays-date').text(date);
+  },
+
+  updateCurrentCustomer(customerName) {
+    $('.current-customer').text(`Guest: ${customerName}`);
   },
 
   updateDOMhtml(location, content) {
@@ -13,6 +17,12 @@ export default {
 
   updateDOMtext(location, content) {
     $(location).text(content);
+  },
+
+  clearInputs(inputs) {
+    inputs.forEach(input => {
+      $(input).val('');
+    });
   },
 
   changeTab(event, _this) {

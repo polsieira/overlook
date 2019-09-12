@@ -8,7 +8,10 @@
 <body>
   <header class="header-container">
     <img class="logo" src="./images/logo.png" alt="overlook logo">
-    <div class="todaysDate"></div>
+    <div class="header-wrapper">
+      <div class="todays-date"></div>
+      <div class="current-customer"></div>
+    </div>
   </header>
   <div class="tabs">
     <ul class="tabs-nav">
@@ -47,7 +50,9 @@
             </button>
           </div>
           <div class="add-container">
-            <input type="text" class="input--add" placeholder="Add new guest">
+            <p>Add new customer:</p>
+            <input type="text" class="input--add first-name" placeholder="First Name">
+            <input type="text" class="input--add last-name" placeholder="Last Name">
             <button type="submit" class="button--add">
               <img class="img img--add" src="./images/plus.svg" alt="plus icon">
             </button>

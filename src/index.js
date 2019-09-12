@@ -10,7 +10,6 @@ import Customer from '../src/Customer.js';
 import Booking from '../src/Booking.js';
 
 // Fetch Data
-
 let hotel, customers, rooms, bookings, roomServices;
 
 fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
@@ -46,7 +45,7 @@ $('.tabs-nav a').on('click', function (event) {
 });
 
 // Start main script
-setTimeout(() => start(), 1000)
+setTimeout(() => start(), 1000);
 
 function start() {
   instantiateHotel();
@@ -68,14 +67,30 @@ function updateMainTab(date) {
     `${hotel.returnPercentageOfRoomsOccupied(date)}%`);
 }
 
-$('.customer-name').on('click', function (event) {
-  let _this = this;
-  console.log(_this);
+// Select customer
+$('.search-results').on('click', function (event) {
+  domUpdates.updateCurrentCustomer(event.target.innerText)
 });
 
+// Search functionality
 $('.input--search').on('keyup', (event) => {
   let filteredCustomers = customers.filter(customer => {
     return customer.name.toUpperCase().includes(event.target.value.toUpperCase());
   });
   domUpdates.addCustomers(filteredCustomers);
+});
+
+// Add customer
+$('.button--add').on('click', () => {
+  let firstName = $('.first-name').val();
+  let lastName = $('.last-name').val();
+  let newName = `${firstName} ${lastName}`;
+  let newID = customers.length + 1;
+  customers.push({
+    id: newID,
+    name: newName
+  });
+  domUpdates.addCustomers(customers);
+  domUpdates.clearInputs(['.first-name', '.last-name']);
+  domUpdates.updateCurrentCustomer(`${lastName}, ${firstName}`)
 });
