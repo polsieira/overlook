@@ -30,7 +30,6 @@ var data = {
   "rooms": {},
   "bookings": {},
   "roomServices": {},
-
 };
 
 Promise.all([apiRequest1, apiRequest2, apiRequest3, apiRequest4])
@@ -40,10 +39,6 @@ Promise.all([apiRequest1, apiRequest2, apiRequest3, apiRequest4])
     data["bookings"] = values[2].bookings;
     data["roomServices"] = values[3].roomServices;
     return data;
-  })
-  .then(() => {
-    domUpdates.addCustomers(data.customers);
-    domUpdates.addRoomServices(data.roomServices);
   })
   .then(() => start());
 
@@ -59,13 +54,36 @@ $('.tabs-nav a').on('click', function (event) {
 function start() {
   instantiateHotel();
   let today = hotel.returnTodaysDate();
+  domUpdates.addCustomers(data.customers);
   domUpdates.updateDate();
-  domUpdates.updateCalendar();
+  searchOrders(today);
+  updateCalendar();
   updateMainTab(today);
 }
 
 function instantiateHotel() {
   hotel = new Hotel(data);
+}
+
+function updateCalendar() {
+  $(function () {
+    $("#datepicker").datepicker({
+      dateFormat: "yy/mm/dd",
+      showAnim: "slide",
+      onSelect: (date) => searchOrders(date)
+    });
+  });
+}
+
+$("#datepicker").on('keyup', (event) => {
+  searchOrders(event.target.value);
+});
+
+function searchOrders(date) {
+  let filteredServices = hotel.roomServices.filter(service => {
+    return service.date.includes(date);
+  });
+  domUpdates.addRoomServices(filteredServices);
 }
 
 function updateMainTab(date) {

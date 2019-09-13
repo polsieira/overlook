@@ -7,12 +7,6 @@ export default {
     $('.todays-date').text(date);
   },
 
-  updateCalendar() {
-    $(function () {
-      $("#datepicker").datepicker();
-    });
-  },
-
   updateCurrentCustomer(customerName) {
     $('.current-customer').text(`Guest: ${customerName}`);
   },

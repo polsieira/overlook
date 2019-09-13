@@ -14,7 +14,13 @@ describe('Hotel', () => {
 
   let hotel, today;
   beforeEach(() => {
-    hotel = new Hotel(users, rooms, bookings, roomServices);
+    let data = {
+      "customers": users,
+      rooms,
+      bookings,
+      roomServices,
+    };
+    hotel = new Hotel(data);
     today = hotel.returnTodaysDate();
   });
 

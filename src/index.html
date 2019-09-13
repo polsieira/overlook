@@ -3,6 +3,7 @@
 
 <head>
   <title>Overlook</title>
+  <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -36,10 +37,13 @@
         </div>
       </section>
       <section id="orders">
-        <div class="date-search-container">
+        <div class="order-container">
           <p>Date: <input type="text" id="datepicker"></p>
+          <div class="customer-order">
+            <p class="total-spent"></p>
+            <p class="spent-today"></p>
+          </div>
         </div>
-
         <div class="order-results">
 
         </div>

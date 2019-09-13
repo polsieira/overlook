@@ -170,8 +170,6 @@ a {
   border-left: none !important;
 }
 
-.button--add {}
-
 .button--search,
 .button--add {
   background: linear-gradient(141deg, white 0%, #CECFD4 51%, #CECFD4 75%);
@@ -190,6 +188,16 @@ a {
   height: 20px;
   pointer-events: none;
   width: 20px;
+}
+
+.order-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.customer-order {
+  width: 25%;
 }
 
 .search-results,
@@ -233,4 +241,8 @@ a {
   font-size: 18px;
   padding: 10px 5px;
   width: 100%;
+}
+
+.no-search-results {
+  margin: 10px 10px;
 }
