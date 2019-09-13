@@ -10,9 +10,10 @@ import Hotel from '../src/Hotel.js';
 import Customer from '../src/Customer.js';
 import Booking from '../src/Booking.js';
 
-// Fetch Data
-let hotel;
+// Globals
+let hotel, customer;
 
+// Fetch Data
 let apiRequest1 = fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
   .then(data => data.json())
 
@@ -56,7 +57,7 @@ function start() {
   let today = hotel.returnTodaysDate();
   domUpdates.addCustomers(data.customers);
   domUpdates.updateDate();
-  searchOrders(today);
+  updateOrders(today);
   updateCalendar();
   updateMainTab(today);
 }
@@ -65,21 +66,25 @@ function instantiateHotel() {
   hotel = new Hotel(data);
 }
 
+function instantiateCustomer(customerData) {
+  customer = new Customer(customerData);
+}
+
 function updateCalendar() {
   $(function () {
     $("#datepicker").datepicker({
       dateFormat: "yy/mm/dd",
       showAnim: "slide",
-      onSelect: (date) => searchOrders(date)
+      onSelect: (date) => updateOrders(date)
     });
   });
 }
 
 $("#datepicker").on('keyup', (event) => {
-  searchOrders(event.target.value);
+  updateOrders(event.target.value);
 });
 
-function searchOrders(date) {
+function updateOrders(date) {
   let filteredServices = hotel.roomServices.filter(service => {
     return service.date.includes(date);
   });
@@ -98,7 +103,8 @@ function updateMainTab(date) {
 // Select customer
 $('.search-results').on('click', (event) => {
   domUpdates.updateCurrentCustomer(event.target.innerText);
-  hotel.getCurrentCustomer(event.target.innerText)
+  hotel.getCurrentCustomer(event.target.innerText);
+  instantiateCustomer(hotel.currentCustomer);
 });
 
 // Search functionality
@@ -122,7 +128,6 @@ $('.button--add').on('click', () => {
   domUpdates.addCustomers(hotel.customers);
   domUpdates.clearInputs(['.first-name', '.last-name']);
   domUpdates.updateCurrentCustomer(`${lastName}, ${firstName}`);
-  hotel.currentCustomer = hotel.customers.find(customer => {
-    return customer.id === newID;
-  })
+  hotel.getCurrentCustomer(`${lastName}, ${firstName}`);
+  instantiateCustomer(hotel.currentCustomer);
 });
