@@ -57,4 +57,10 @@ describe('Customer', () => {
     expect(customer.calculateDailyBill(bills, '2019/09/28')).to.equal(9.89);
   });
 
+  it('should return if a customer has a booking today', () => {
+    let customerBookings = customer.getCustomerSpecificData(bookings);
+    expect(customer.determineBookingToday(customerBookings, '2019/09/28')).to.equal(true);
+    expect(customer.determineBookingToday(customerBookings, '2019/09/27')).to.equal(false);
+  });
+
 });

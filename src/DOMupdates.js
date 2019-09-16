@@ -59,8 +59,83 @@ export default {
     $('.search-results').html(html);
   },
 
-  addRoomServices(roomServices) {
+  addBookings(bookings, day) {
     let html = '';
+    if (!day) {
+      day = ''
+    }
+    if (bookings.length < 1) {
+      html += `<span class="no-search-results">No bookings found...</span>`
+    } else {
+      html += `<table>
+    <thead>
+    <tr>
+      <th>Room Number</th>
+      <th>Room Type</th>
+      <th>Bidet</th>
+      <th>Bed Size</th>
+      <th>Number of Beds</th>
+      <th>Cost Per Night</th>
+    </tr>
+    </thead>
+    <tbody>`
+      bookings.forEach(booking => {
+        html += `<tr>
+          <td>
+            ${booking.number}
+          </td>
+          <td>
+            ${booking.roomType}
+          </td>
+          <td>
+            ${booking.bidet}
+          </td>
+          <td>
+            ${booking.bedSize}
+          </td>
+          <td>
+            ${booking.numBeds}
+          </td>
+          <td>
+            $${booking.costPerNight}
+          </td>
+        </tr>`
+      });
+    }
+    html += `</tbody></table>`;
+    $('.avaliable-rooms').html(html);
+    $('#datepicker-rooms').val(`${day}`)
+  },
+
+  addCustomerBookings(bookings) {
+    let html = '';
+    if (bookings.length < 1) {
+      html += `<span class="no-search-results">No bookings found...</span>`
+    } else {
+      bookings.sort((orderA, orderB) => {
+        let A = orderA.date.split('/').join();
+        let B = orderB.date.split('/').join();
+        return B > A ? 1 : B < A ? -1 : 0;
+      });
+      bookings.forEach(booking => {
+        html += `<span class="order">
+        <div>
+          ${booking.date}
+        </div>
+        <div>Room Number:   
+          ${booking.roomNumber}
+        </div>
+        </span>`
+      });
+    }
+    $('.customer-bookings').html(html);
+  },
+
+  addRoomServices(roomServices, day) {
+    let html = '';
+    if (!day) {
+      day = ''
+    }
     if (roomServices.length < 1) {
       html += `<span class="no-search-results">No orders found...</span>`
     } else {
@@ -79,11 +154,16 @@ export default {
       });
     }
     $('.order-results').html(html);
+    $('#datepicker-orders').val(`${day}`)
   },
 
   addCustomerSpending(totalSpent, dailySpent) {
     $('.total-spent').text(`Total Spent: $${totalSpent}`);
     $('.spent-today').text(`Total Spent Today: $${dailySpent}`);
+  },
+
+  toggleButton(button, toggle) {
+    $(button).attr("disabled", toggle);
   }
 
 

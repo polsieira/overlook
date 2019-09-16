@@ -58,6 +58,7 @@ function start() {
   instantiateBooking();
   today = hotel.returnTodaysDate();
   domUpdates.addCustomers(data.customers);
+  domUpdates.addBookings(booking.findAvaliableRooms(today), today);
   domUpdates.updateDate();
   updateOrders(today);
   updateCalendar();
@@ -70,7 +71,7 @@ function instantiateHotel() {
 }
 
 function instantiateBooking() {
-  booking = new Booking(data.bookings);
+  booking = new Booking(data.bookings, data.rooms);
 }
 
 function instantiateCustomer(customerData) {
@@ -79,23 +80,38 @@ function instantiateCustomer(customerData) {
 
 function updateCalendar() {
   $(function () {
-    $("#datepicker").datepicker({
+    $("#datepicker-orders").datepicker({
       dateFormat: "yy/mm/dd",
       showAnim: "slide",
       onSelect: (date) => updateOrders(date)
     });
   });
+  $(function () {
+    $("#datepicker-rooms").datepicker({
+      dateFormat: "yy/mm/dd",
+      showAnim: "slide",
+      onSelect: (date) => updateRooms(date)
+    });
+  });
 }
 
-$("#datepicker").on('keyup', (event) => {
+$("#datepicker-orders").on('keyup', (event) => {
   updateOrders(event.target.value);
+});
+
+$("#datepicker-orders").on('keyup', (event) => {
+  updateRooms(event.target.value);
 });
 
 function updateOrders(date) {
   let filteredServices = hotel.roomServices.filter(service => {
     return service.date.includes(date);
   });
-  domUpdates.addRoomServices(filteredServices);
+  domUpdates.addRoomServices(filteredServices, date);
+}
+
+function updateRooms(date) {
+  domUpdates.addBookings(booking.findAvaliableRooms(date), date);
 }
 
 function updateMainTab(date) {
@@ -109,8 +125,8 @@ function updateMainTab(date) {
 
 function updateRoomTab() {
   let dates = booking.findPopularBookingDate();
-  domUpdates.updateDOMtext('.popular-booking-date', `Most booked: ${dates.mostPopular}`);
-  domUpdates.updateDOMtext('.most-rooms-avaliable-date', `Most avaliability: ${dates.leastPopular}`);
+  domUpdates.updateDOMtext('.popular-booking-date', `Most Booked Day: ${dates.mostPopular}`);
+  domUpdates.updateDOMtext('.most-rooms-avaliable-date', `Day With Most Avaliability: ${dates.leastPopular}`);
 }
 
 // Select customer
@@ -124,6 +140,13 @@ $('.search-results').on('click', (event) => {
       .calculateTotalBill(bills)).toFixed(2), (customer
       .calculateDailyBill(bills, today)).toFixed(2));
   domUpdates.addRoomServices(bills);
+  let bookings = customer.getCustomerSpecificData(hotel.bookings)
+  domUpdates.addCustomerBookings(bookings);
+  if (!customer.determineBookingToday(bookings, today)) {
+    domUpdates.toggleButton('.button--new-booking', false);
+  } else {
+    domUpdates.toggleButton('.button--new-booking', true);
+  }
 });
 
 //Delete customer
@@ -135,6 +158,7 @@ $('.current-customer').on('click', () => {
   domUpdates.updateDOMhtml('.total-spent', '');
   domUpdates.updateDOMhtml('.spent-today', '')
   domUpdates.addRoomServices(hotel.roomServices);
+  domUpdates.toggleButton('.button--new-booking', true);
 });
 
 // Search functionality
@@ -160,4 +184,15 @@ $('.button--add').on('click', () => {
   domUpdates.updateCurrentCustomer(`${lastName}, ${firstName}`);
   hotel.getCurrentCustomer(`${lastName}, ${firstName}`);
   instantiateCustomer(hotel.currentCustomer);
+  let bills = customer.getCustomerSpecificData(hotel.roomServices);
+  domUpdates
+    .addCustomerSpending((customer
+      .calculateTotalBill(bills)).toFixed(2), (customer
+      .calculateDailyBill(bills, today)).toFixed(2));
+  domUpdates.addRoomServices(bills);
+  let bookings = customer.getCustomerSpecificData(hotel.bookings)
+  domUpdates.addCustomerBookings(bookings);
+  if (!customer.determineBookingToday(bookings, today)) {
+    domUpdates.toggleButton('.button--new-booking', false);
+  }
 });

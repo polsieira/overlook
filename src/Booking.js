@@ -1,6 +1,7 @@
 class Booking {
-  constructor(bookings) {
+  constructor(bookings, rooms) {
     this.bookings = bookings;
+    this.rooms = rooms;
   }
 
   findPopularBookingDate() {
@@ -31,6 +32,28 @@ class Booking {
       mostPopular: popularDate,
       leastPopular: openDate
     };
+  }
+
+  findBookedRooms(date) {
+    let bookedRooms = [];
+    this.bookings.forEach(booking => {
+      if (booking.date === date) {
+        bookedRooms.push(booking.roomNumber);
+      }
+    });
+
+    return bookedRooms;
+  }
+
+  findAvaliableRooms(date) {
+    let bookedRooms = this.findBookedRooms(date);
+    return this.rooms.reduce((avaliableRooms, room) => {
+      if (!bookedRooms.includes(room.number)) {
+        avaliableRooms.push(room);
+      }
+
+      return avaliableRooms;
+    }, []);
   }
 }
 

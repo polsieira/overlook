@@ -23,6 +23,11 @@ class Customer {
     }, 0);
   }
 
+  determineBookingToday(bookings, date) {
+    let isBooking = bookings.find(booking => booking.date === date);
+    return isBooking ? true : false;
+  }
+
 }
 
 export default Customer;
