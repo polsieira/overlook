@@ -12,7 +12,7 @@ import Customer from '../src/Customer.js';
 import Booking from '../src/Booking.js';
 
 // Globals
-let hotel, customer, today;
+let hotel, booking, customer, today;
 
 // Fetch Data
 let apiRequest1 = fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
@@ -55,16 +55,22 @@ $('.tabs-nav a').on('click', function (event) {
 
 function start() {
   instantiateHotel();
+  instantiateBooking();
   today = hotel.returnTodaysDate();
   domUpdates.addCustomers(data.customers);
   domUpdates.updateDate();
   updateOrders(today);
   updateCalendar();
   updateMainTab(today);
+  updateRoomTab();
 }
 
 function instantiateHotel() {
   hotel = new Hotel(data);
+}
+
+function instantiateBooking() {
+  booking = new Booking(data.bookings);
 }
 
 function instantiateCustomer(customerData) {
@@ -99,6 +105,12 @@ function updateMainTab(date) {
     `$${hotel.returnTotalRevenue(date)}`);
   domUpdates.updateDOMtext('.info--percent-occupied',
     `${hotel.returnPercentageOfRoomsOccupied(date)}%`);
+}
+
+function updateRoomTab() {
+  let dates = booking.findPopularBookingDate();
+  domUpdates.updateDOMtext('.popular-booking-date', `Most booked: ${dates.mostPopular}`);
+  domUpdates.updateDOMtext('.most-rooms-avaliable-date', `Most avaliability: ${dates.leastPopular}`);
 }
 
 // Select customer

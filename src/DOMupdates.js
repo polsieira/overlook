@@ -85,4 +85,6 @@ export default {
     $('.total-spent').text(`Total Spent: $${totalSpent}`);
     $('.spent-today').text(`Total Spent Today: $${dailySpent}`);
   }
+
+
 }
