@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import 'jquery-ui-bundle';
+import './sorttable';
 import './css/base.scss';
 import './images/logo.png'
 import './images/searching-magnifying-glass.svg'
@@ -159,6 +160,7 @@ $('.current-customer').on('click', () => {
   domUpdates.updateDOMhtml('.spent-today', '')
   domUpdates.addRoomServices(hotel.roomServices);
   domUpdates.toggleButton('.button--new-booking', true);
+  domUpdates.updateDOMhtml('.room-type-menu', '');
 });
 
 // Search functionality
@@ -194,5 +196,23 @@ $('.button--add').on('click', () => {
   domUpdates.addCustomerBookings(bookings);
   if (!customer.determineBookingToday(bookings, today)) {
     domUpdates.toggleButton('.button--new-booking', false);
+  }
+});
+
+//New booking
+$('.button--new-booking').on('click', () => {
+  domUpdates.addRoomTypeMenu();
+});
+
+//Show booking type
+$('.booking-container').on('change', () => {
+  if (event.target.classList[0] === 'room-type') {
+    let avaliableRooms = booking.findAvaliableRooms(today);
+    let roomByType = booking.filterByRoomType(avaliableRooms, event.target.value);
+    if (roomByType) {
+      domUpdates.addBookings(roomByType, today);
+    } else {
+      domUpdates.addBookings(avaliableRooms, today);
+    }
   }
 });

@@ -55,6 +55,12 @@ class Booking {
       return avaliableRooms;
     }, []);
   }
+
+  filterByRoomType(rooms, type) {
+    return rooms.filter(room => {
+      return room.roomType.includes(type);
+    })
+  }
 }
 
 export default Booking;

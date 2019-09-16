@@ -67,7 +67,7 @@ export default {
     if (bookings.length < 1) {
       html += `<span class="no-search-results">No bookings found...</span>`
     } else {
-      html += `<table>
+      html += `
     <thead>
     <tr>
       <th>Room Number</th>
@@ -102,7 +102,7 @@ export default {
         </tr>`
       });
     }
-    html += `</tbody></table>`;
+    html += `</tbody>`;
     $('.avaliable-rooms').html(html);
     $('#datepicker-rooms').val(`${day}`)
   },
@@ -164,6 +164,17 @@ export default {
 
   toggleButton(button, toggle) {
     $(button).attr("disabled", toggle);
+  },
+
+  addRoomTypeMenu() {
+    let html = `<select class="room-type">
+  <option value="" disabled selected>Room Types</option>
+  <option value = "single room">Single Room</option>
+  <option value = "residential suite">Residential Suite</option>
+  <option value="suite">Suite</option>
+  <option value = "junior suite">Junior Suite</option>
+  </select>`;
+    $('.room-type-menu').html(html)
   }
 
 
