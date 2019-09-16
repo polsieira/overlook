@@ -4,6 +4,7 @@ import './css/base.scss';
 import './images/logo.png'
 import './images/searching-magnifying-glass.svg'
 import './images/plus.svg'
+import './images/delete-button.svg'
 import domUpdates from './domUpdates'
 
 import Hotel from '../src/Hotel.js';
@@ -11,7 +12,7 @@ import Customer from '../src/Customer.js';
 import Booking from '../src/Booking.js';
 
 // Globals
-let hotel, customer;
+let hotel, customer, today;
 
 // Fetch Data
 let apiRequest1 = fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
@@ -54,7 +55,7 @@ $('.tabs-nav a').on('click', function (event) {
 
 function start() {
   instantiateHotel();
-  let today = hotel.returnTodaysDate();
+  today = hotel.returnTodaysDate();
   domUpdates.addCustomers(data.customers);
   domUpdates.updateDate();
   updateOrders(today);
@@ -105,6 +106,23 @@ $('.search-results').on('click', (event) => {
   domUpdates.updateCurrentCustomer(event.target.innerText);
   hotel.getCurrentCustomer(event.target.innerText);
   instantiateCustomer(hotel.currentCustomer);
+  let bills = customer.getCustomerSpecificData(hotel.roomServices);
+  domUpdates
+    .addCustomerSpending((customer
+      .calculateTotalBill(bills)).toFixed(2), (customer
+      .calculateDailyBill(bills, today)).toFixed(2));
+  domUpdates.addRoomServices(bills);
+});
+
+//Delete customer
+$('.current-customer').on('click', () => {
+  if (event.target.classList[0] === 'img-delete-current-customer') {
+    domUpdates.updateDOMhtml('.current-customer', '');
+  }
+  hotel.currentCustomer = null;
+  domUpdates.updateDOMhtml('.total-spent', '');
+  domUpdates.updateDOMhtml('.spent-today', '')
+  domUpdates.addRoomServices(hotel.roomServices);
 });
 
 // Search functionality

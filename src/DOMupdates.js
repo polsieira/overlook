@@ -8,7 +8,7 @@ export default {
   },
 
   updateCurrentCustomer(customerName) {
-    $('.current-customer').text(`Guest: ${customerName}`);
+    $('.current-customer').html(`<p>Guest: ${customerName}</p><img src="./images/delete-button.svg" class="img-delete-current-customer" alt="delete button">`);
   },
 
   updateDOMhtml(location, content) {
@@ -79,5 +79,10 @@ export default {
       });
     }
     $('.order-results').html(html);
+  },
+
+  addCustomerSpending(totalSpent, dailySpent) {
+    $('.total-spent').text(`Total Spent: $${totalSpent}`);
+    $('.spent-today').text(`Total Spent Today: $${dailySpent}`);
   }
 }
