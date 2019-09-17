@@ -71,41 +71,46 @@ export default {
       html += `<span class="no-search-results">No bookings found...</span>`
     } else {
       html += `
-    <thead>
-    <tr>
-      <th>Room Number</th>
-      <th>Room Type</th>
-      <th>Bidet</th>
-      <th>Bed Size</th>
-      <th>Number of Beds</th>
-      <th>Cost Per Night</th>
-    </tr>
-    </thead>
-    <tbody>`
+        <table>
+          <thead>
+            <tr>
+              <th>Room Number</th>
+              <th>Room Type</th>
+              <th>Bidet</th>
+              <th>Bed Size</th>
+              <th>Number of Beds</th>
+              <th>Cost Per Night</th>
+            </tr>
+          </thead>
+          <tbody>`
       bookings.forEach(booking => {
-        html += `<tr>
-          <td>
-            ${booking.number}
-          </td>
-          <td>
-            ${booking.roomType}
-          </td>
-          <td>
-            ${booking.bidet}
-          </td>
-          <td>
-            ${booking.bedSize}
-          </td>
-          <td>
-            ${booking.numBeds}
-          </td>
-          <td>
-            $${booking.costPerNight}
-          </td>
-        </tr>`
+        html += `
+          <tr>
+            <td>
+              ${booking.number}
+            </td>
+            <td>
+              ${booking.roomType}
+            </td>
+            <td>
+              ${booking.bidet}
+            </td>
+            <td>
+              ${booking.bedSize}
+            </td>
+            <td>
+              ${booking.numBeds}
+            </td>
+            <td>
+              $${booking.costPerNight}
+            </td>
+          </tr>`
       });
     }
-    html += `</tbody>`;
+    html += `
+        </tbody>
+      </table>`;
+
     $('.avaliable-rooms').html(html);
     $('#datepicker-rooms').val(`${day}`)
   },
