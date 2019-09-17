@@ -171,7 +171,8 @@ $('.current-customer').on('click', () => {
   }
   hotel.currentCustomer = null;
   domUpdates.updateDOMhtml('.total-spent', '');
-  domUpdates.updateDOMhtml('.spent-today', '')
+  domUpdates.updateDOMhtml('.spent-today', '');
+  domUpdates.updateDOMhtml('.customer-bookings', '');
   domUpdates.addRoomServices(hotel.roomServices);
   domUpdates.toggleButton('.button--new-booking', true);
   domUpdates.toggleButton('.button--order-room-service', true);
