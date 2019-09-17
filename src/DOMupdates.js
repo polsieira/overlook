@@ -8,7 +8,10 @@ export default {
   },
 
   updateCurrentCustomer(customerName) {
-    $('.current-customer').html(`<p>Guest: ${customerName}</p><img src="./images/delete-button.svg" class="img-delete-current-customer" alt="delete button">`);
+    $('.current-customer').html(
+      `<p>Guest: ${customerName}</p>
+      <img src="./images/delete-button.svg"
+      class="img-delete-current-customer" alt="delete button">`);
   },
 
   updateDOMhtml(location, content) {
@@ -167,13 +170,14 @@ export default {
   },
 
   addRoomTypeMenu() {
-    let html = `<select class="room-type">
-  <option value="" disabled selected>Room Types</option>
-  <option value = "single room">Single Room</option>
-  <option value = "residential suite">Residential Suite</option>
-  <option value="suite">Suite</option>
-  <option value = "junior suite">Junior Suite</option>
-  </select>`;
+    let html = `
+      <select class="room-type">
+        <option value="" disabled selected>Room Types</option>
+        <option value = "single room">Single Room</option>
+        <option value = "residential suite">Residential Suite</option>
+        <option value="suite">Suite</option>
+        <option value = "junior suite">Junior Suite</option>
+      </select>`;
     $('.room-type-menu').html(html)
   }
 

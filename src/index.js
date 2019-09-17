@@ -1,11 +1,14 @@
 import $ from 'jquery';
 import 'jquery-ui-bundle';
 import './sorttable';
+
 import './css/base.scss';
+
 import './images/logo.png'
 import './images/searching-magnifying-glass.svg'
 import './images/plus.svg'
 import './images/delete-button.svg'
+
 import domUpdates from './domUpdates'
 
 import Hotel from '../src/Hotel.js';
@@ -16,16 +19,20 @@ import Booking from '../src/Booking.js';
 let hotel, booking, customer, today;
 
 // Fetch Data
-let apiRequest1 = fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
+let apiRequest1 = fetch(
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
   .then(data => data.json())
 
-let apiRequest2 = fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
+let apiRequest2 = fetch(
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
   .then(data => data.json())
 
-let apiRequest3 = fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+let apiRequest3 = fetch(
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
   .then(data => data.json())
 
-let apiRequest4 = fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
+let apiRequest4 = fetch(
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
   .then(data => data.json())
 
 var data = {
@@ -45,15 +52,6 @@ Promise.all([apiRequest1, apiRequest2, apiRequest3, apiRequest4])
   })
   .then(() => start());
 
-// Show the first tab by default
-domUpdates.startOnMainTab();
-
-// Change tab class and display content
-$('.tabs-nav a').on('click', function (event) {
-  let _this = this;
-  domUpdates.changeTab(event, _this);
-});
-
 function start() {
   instantiateHotel();
   instantiateBooking();
@@ -67,6 +65,15 @@ function start() {
   updateRoomTab();
 }
 
+// Show the first tab by default
+domUpdates.startOnMainTab();
+
+// Change tab class and display content
+$('.tabs-nav a').on('click', function (event) {
+  let _this = this;
+  domUpdates.changeTab(event, _this);
+});
+
 function instantiateHotel() {
   hotel = new Hotel(data);
 }
@@ -79,6 +86,8 @@ function instantiateCustomer(customerData) {
   customer = new Customer(customerData);
 }
 
+
+// Event listeners
 function updateCalendar() {
   $(function () {
     $("#datepicker-orders").datepicker({
