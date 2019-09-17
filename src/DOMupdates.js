@@ -179,17 +179,39 @@ export default {
     $(button).attr("disabled", toggle);
   },
 
-  addRoomTypeMenu() {
-    let html = `
-      <select class="room-type">
-        <option value="" disabled selected>Room Types</option>
-        <option value = "single room">Single Room</option>
-        <option value = "residential suite">Residential Suite</option>
-        <option value="suite">Suite</option>
-        <option value = "junior suite">Junior Suite</option>
-      </select>`;
-    $('.room-type-menu').html(html)
-  }
+  toggleRoomTypeMenu(toggle) {
+    if (toggle) {
+      $('.room-type').addClass('show');
+    } else {
+      $('.room-type').removeClass('show');
+    }
+  },
 
+  toggleRoomServiceMenu(toggle) {
+    if (toggle) {
+      $('.room-service').addClass('show');
+    } else {
+      $('.room-service').removeClass('show');
+    }
+  },
+
+  buildRoomServiceMenu(roomServices) {
+    let items = Object.keys(roomServices);
+
+    let html = `
+      <select class="room-service">
+        <option value="" disabled selected>Menu</option>`;
+
+    items.forEach(item => {
+      html += `
+          <option value="${item}">
+            <span class="price">$${roomServices[item]}</span>
+            <span class="menu-item">${item}</span>
+          </option>`;
+    });
+    html += `</select>`;
+
+    $('.room-service-menu').html(html);
+  }
 
 }

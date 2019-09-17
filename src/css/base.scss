@@ -168,7 +168,8 @@ a {
   height: 200px;
 }
 
-.button--new-booking {
+.button--new-booking,
+.button--order-room-service {
   cursor: pointer;
   font: 20px "Open Sans",
     "HelveticaNeue-Light",
@@ -195,8 +196,10 @@ a {
   }
 }
 
-.room-type {
+.room-type,
+.room-service {
   cursor: pointer;
+  display: none;
   font: 20px "Open Sans",
     "HelveticaNeue-Light",
     "Helvetica Neue Light",
@@ -208,6 +211,10 @@ a {
   margin-top: 10px;
   padding: 10px;
   width: 45%;
+}
+
+.show {
+  display: block;
 }
 
 table {

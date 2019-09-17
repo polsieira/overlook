@@ -61,8 +61,22 @@
           <div class="booking-container">
             <div class="customer-bookings">
             </div>
-            <button disabled type="submit" class="button--new-booking">New Booking</button>
-            <div class="room-type-menu"></div>
+            <div class="new-booking-container">
+              <button disabled type="submit" class="button--new-booking">New Booking</button>
+              <div class="room-type-menu">
+                <select class="room-type">
+                  <option value="" disabled selected>Room Types</option>
+                  <option value="single room">Single Room</option>
+                  <option value="residential suite">Residential Suite</option>
+                  <option value="suite">Suite</option>
+                  <option value="junior suite">Junior Suite</option>
+                </select>
+              </div>
+            </div>
+            <div class="room-service-container">
+              <button disabled type="submit" class="button--order-room-service">Order Room Service</button>
+              <div class="room-service-menu"></div>
+            </div>
           </div>
         </div>
 

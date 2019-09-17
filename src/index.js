@@ -20,19 +20,19 @@ let hotel, booking, customer, today;
 
 // Fetch Data
 let apiRequest1 = fetch(
-    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
   .then(data => data.json())
 
 let apiRequest2 = fetch(
-    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
   .then(data => data.json())
 
 let apiRequest3 = fetch(
-    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
   .then(data => data.json())
 
 let apiRequest4 = fetch(
-    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
   .then(data => data.json())
 
 var data = {
@@ -63,6 +63,7 @@ function start() {
   updateCalendar();
   updateMainTab(today);
   updateRoomTab();
+  domUpdates.buildRoomServiceMenu(createRoomServiceMenu());
 }
 
 // Show the first tab by default
@@ -154,9 +155,13 @@ $('.search-results').on('click', (event) => {
   domUpdates.addCustomerBookings(bookings);
   if (!customer.determineBookingToday(bookings, today)) {
     domUpdates.toggleButton('.button--new-booking', false);
+    domUpdates.toggleButton('.button--order-room-service', true);
   } else {
     domUpdates.toggleButton('.button--new-booking', true);
+    domUpdates.toggleButton('.button--order-room-service', false);
   }
+  domUpdates.toggleRoomServiceMenu(false);
+  domUpdates.toggleRoomTypeMenu(false);
 });
 
 //Delete customer
@@ -169,7 +174,9 @@ $('.current-customer').on('click', () => {
   domUpdates.updateDOMhtml('.spent-today', '')
   domUpdates.addRoomServices(hotel.roomServices);
   domUpdates.toggleButton('.button--new-booking', true);
-  domUpdates.updateDOMhtml('.room-type-menu', '');
+  domUpdates.toggleButton('.button--order-room-service', true);
+  domUpdates.toggleRoomServiceMenu(false);
+  domUpdates.toggleRoomTypeMenu(false);
 });
 
 // Search functionality
@@ -207,22 +214,13 @@ $('.button--add').on('click', () => {
   if (!customer.determineBookingToday(bookings, today)) {
     domUpdates.toggleButton('.button--new-booking', false);
   }
+  domUpdates.toggleRoomServiceMenu(false);
+  domUpdates.toggleRoomTypeMenu(false);
 });
-
-function addCustomerToData(params) {
-  let firstName = $('.first-name').val();
-  let lastName = $('.last-name').val();
-  let newName = `${firstName} ${lastName}`;
-  let newID = hotel.customers.length + 1;
-  hotel.customers.push({
-    id: newID,
-    name: newName
-  });
-}
 
 //New booking
 $('.button--new-booking').on('click', () => {
-  domUpdates.addRoomTypeMenu();
+  domUpdates.toggleRoomTypeMenu(true);
 });
 
 //Show booking type
@@ -236,4 +234,19 @@ $('.booking-container').on('change', () => {
       domUpdates.addBookings(avaliableRooms, today);
     }
   }
+});
+
+function createRoomServiceMenu() {
+  let menu = hotel.roomServices.reduce((menu, service) => {
+    if (!menu[service.food]) {
+      menu[service.food] = service.totalCost;
+    }
+    return menu;
+  }, {});
+
+  return menu;
+}
+
+$('.button--order-room-service').on('click', () => {
+  domUpdates.toggleRoomServiceMenu(true);
 });
