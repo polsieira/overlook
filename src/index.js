@@ -20,19 +20,19 @@ let hotel, booking, customer, today;
 
 // Fetch Data
 let apiRequest1 = fetch(
-  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
   .then(data => data.json())
 
 let apiRequest2 = fetch(
-  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
   .then(data => data.json())
 
 let apiRequest3 = fetch(
-  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
   .then(data => data.json())
 
 let apiRequest4 = fetch(
-  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
   .then(data => data.json())
 
 var data = {
@@ -142,13 +142,13 @@ function updateRoomTab() {
 // Select customer
 $('.search-results').on('click', (event) => {
   domUpdates.updateCurrentCustomer(event.target.innerText);
-  hotel.getCurrentCustomer(event.target.innerText);
+  hotel.getCurrentCustomer(event.target.dataset.id);
   instantiateCustomer(hotel.currentCustomer);
   let bills = customer.getCustomerSpecificData(hotel.roomServices);
   domUpdates
-    .addCustomerSpending((customer
-      .calculateTotalBill(bills)).toFixed(2), (customer
-      .calculateDailyBill(bills, today)).toFixed(2));
+    .addCustomerSpending(
+      (customer.calculateTotalBill(bills)).toFixed(2),
+      (customer.calculateDailyBill(bills, today)).toFixed(2));
   domUpdates.addRoomServices(bills);
   let bookings = customer.getCustomerSpecificData(hotel.bookings)
   domUpdates.addCustomerBookings(bookings);
@@ -175,7 +175,8 @@ $('.current-customer').on('click', () => {
 // Search functionality
 $('.input--search').on('keyup', (event) => {
   let filteredCustomers = hotel.customers.filter(customer => {
-    return customer.name.toUpperCase().includes(event.target.value.toUpperCase());
+    return customer.name.toUpperCase()
+      .includes(event.target.value.toUpperCase());
   });
   domUpdates.addCustomers(filteredCustomers);
 });
@@ -193,7 +194,7 @@ $('.button--add').on('click', () => {
   domUpdates.addCustomers(hotel.customers);
   domUpdates.clearInputs(['.first-name', '.last-name']);
   domUpdates.updateCurrentCustomer(`${lastName}, ${firstName}`);
-  hotel.getCurrentCustomer(`${lastName}, ${firstName}`);
+  hotel.getCurrentCustomer(newID);
   instantiateCustomer(hotel.currentCustomer);
   let bills = customer.getCustomerSpecificData(hotel.roomServices);
   domUpdates
@@ -207,6 +208,17 @@ $('.button--add').on('click', () => {
     domUpdates.toggleButton('.button--new-booking', false);
   }
 });
+
+function addCustomerToData(params) {
+  let firstName = $('.first-name').val();
+  let lastName = $('.last-name').val();
+  let newName = `${firstName} ${lastName}`;
+  let newID = hotel.customers.length + 1;
+  hotel.customers.push({
+    id: newID,
+    name: newName
+  });
+}
 
 //New booking
 $('.button--new-booking').on('click', () => {

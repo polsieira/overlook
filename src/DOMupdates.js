@@ -56,7 +56,7 @@ export default {
         return 0;
       });
       customers.forEach(customer => {
-        html += `<span class="customer-name">${customer.name.split(' ')[1]}, ${customer.name.split(' ')[0]}</span>`
+        html += `<span class="customer-name" data-id=${customer.id}>${customer.name.split(' ')[1]}, ${customer.name.split(' ')[0]}</span>`
       });
     }
     $('.search-results').html(html);

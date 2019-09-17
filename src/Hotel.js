@@ -17,11 +17,12 @@ class Hotel {
     return today;
   }
 
-  getCurrentCustomer(name) {
-    name = `${name.split(', ')[1]} ${name.split(',')[0]}`;
+  getCurrentCustomer(id) {
     this.currentCustomer = this.customers.find(customer => {
-      return customer.name.includes(name);
+      return customer.id === parseInt(id);
     });
+
+    console.log(this.currentCustomer)
   }
 
   findRoomsBooked(date) {
