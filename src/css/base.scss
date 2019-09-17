@@ -10,6 +10,15 @@ body {
   font: 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
 }
 
+input,
+button {
+  &:focus {
+    outline: none !important;
+    border-color: #3AD1B3;
+    box-shadow: 0 0 10px #719ECE;
+  }
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -226,6 +235,20 @@ tr {
   width: 100%;
 }
 
+.enable-pointer {
+  cursor: pointer;
+  pointer-events: all !important;
+
+  &:hover {
+    background: #c2c2c4;
+  }
+}
+
+.select-room {
+  background: #666;
+  color: white;
+}
+
 th,
 td {
   border: 1px solid #CECFD4;
@@ -267,16 +290,14 @@ td {
   margin-bottom: 10px;
   padding: 5px 10px;
   width: 80%;
-
-  &:focus {
-    outline: none !important;
-    border-color: #3AD1B3;
-    box-shadow: 0 0 10px #719ECE;
-  }
 }
 
 .button--add {
-  cursor: pointer;
+  &:hover {
+    &:enabled {
+      cursor: pointer;
+    }
+  }
 }
 
 .button--search {

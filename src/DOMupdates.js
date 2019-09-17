@@ -90,7 +90,7 @@ export default {
           <tbody>`
       bookings.forEach(booking => {
         html += `
-          <tr>
+          <tr class="book-room" data-room-number=${booking.number}>
             <td>
               ${booking.number}
             </td>
@@ -212,6 +212,14 @@ export default {
     html += `</select>`;
 
     $('.room-service-menu').html(html);
+  },
+
+  enableSelectRoom() {
+    $('.book-room').addClass('enable-pointer');
+  },
+
+  selectRoom(room) {
+    $(room).addClass('select-room');
   }
 
 }

@@ -189,6 +189,27 @@ $('.input--search').on('keyup', (event) => {
   domUpdates.addCustomers(filteredCustomers);
 });
 
+// Enable add customer button
+$('.first-name').on('keyup', () => {
+  let firstName = $('.first-name').val();
+  let lastName = $('.last-name').val();
+  if (firstName !== '' && lastName !== '') {
+    domUpdates.toggleButton('.button--add', false);
+  } else {
+    domUpdates.toggleButton('.button--add', true);
+  }
+});
+
+$('.last-name').on('keyup', () => {
+  let firstName = $('.first-name').val();
+  let lastName = $('.last-name').val();
+  if (firstName !== '' && lastName !== '') {
+    domUpdates.toggleButton('.button--add', false);
+  } else {
+    domUpdates.toggleButton('.button--add', true);
+  }
+});
+
 // Add customer
 $('.button--add').on('click', () => {
   let firstName = $('.first-name').val();
@@ -234,6 +255,7 @@ $('.booking-container').on('change', () => {
     } else {
       domUpdates.addBookings(avaliableRooms, today);
     }
+    domUpdates.enableSelectRoom();
   }
 });
 
@@ -250,4 +272,10 @@ function createRoomServiceMenu() {
 
 $('.button--order-room-service').on('click', () => {
   domUpdates.toggleRoomServiceMenu(true);
+});
+
+$('.avaliable-rooms').on('click', (event) => {
+  if (event.target.parentElement.className.includes('enable-pointer')) {
+    domUpdates.selectRoom(event.target.parentElement);
+  }
 });

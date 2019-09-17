@@ -58,7 +58,7 @@ class Booking {
 
   filterByRoomType(rooms, type) {
     return rooms.filter(room => {
-      return room.roomType.includes(type);
+      return room.roomType === type;
     })
   }
 }
