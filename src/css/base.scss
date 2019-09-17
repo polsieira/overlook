@@ -160,7 +160,12 @@ a {
   justify-content: space-between;
 }
 
-.avaliable-rooms,
+.avaliable-rooms-container {
+  align-items: center;
+  height: 400px;
+}
+
+.avaliable-rooms-container,
 .booking-container {
   width: 49%;
 }
@@ -169,7 +174,7 @@ a {
 .customer-bookings {
   background: #faf9f9;
   border: 2px solid #CECFD4;
-  height: 400px;
+  height: 315px;
   overflow: scroll;
 }
 
@@ -178,7 +183,8 @@ a {
 }
 
 .button--new-booking,
-.button--order-room-service {
+.button--order-room-service,
+.button--reserve-booking {
   cursor: pointer;
   font: 20px "Open Sans",
     "HelveticaNeue-Light",

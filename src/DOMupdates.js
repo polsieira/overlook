@@ -219,7 +219,13 @@ export default {
   },
 
   selectRoom(room) {
-    $(room).addClass('select-room');
-  }
+    $(room).toggleClass('select-room');
+    if ($('.enable-pointer').hasClass('select-room')) {
+      this.toggleButton('.button--reserve-booking', false);
+    } else {
+      this.toggleButton('.button--reserve-booking', true);
+    }
+  },
+
 
 }

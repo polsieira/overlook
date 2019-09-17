@@ -20,19 +20,19 @@ let hotel, booking, customer, today;
 
 // Fetch Data
 let apiRequest1 = fetch(
-  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
   .then(data => data.json())
 
 let apiRequest2 = fetch(
-  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
   .then(data => data.json())
 
 let apiRequest3 = fetch(
-  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
   .then(data => data.json())
 
 let apiRequest4 = fetch(
-  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
+    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
   .then(data => data.json())
 
 var data = {
