@@ -48,15 +48,20 @@ export default {
       html += `<span class="no-search-results">No customers found...</span>`
     } else {
       customers.sort((customerA, customerB) => {
-        if (customerA.name.split(' ').pop()[0] > customerB.name.split(' ').pop()[0]) {
+        let lastNameA = customerA.name.split(' ').pop();
+        let lastNameB = customerB.name.split(' ').pop();
+        if (lastNameA > lastNameB) {
           return 1;
-        } else if (customerA.name.split(' ').pop()[0] < customerB.name.split(' ').pop()[0]) {
+        } else if (lastNameA < lastNameB) {
           return -1;
         }
         return 0;
       });
       customers.forEach(customer => {
-        html += `<span class="customer-name" data-id=${customer.id}>${customer.name.split(' ')[1]}, ${customer.name.split(' ')[0]}</span>`
+        html += `
+          <span class="customer-name" data-id=${customer.id}>
+            ${customer.name.split(' ')[1]}, ${customer.name.split(' ')[0]}
+          </span>`
       });
     }
     $('.search-results').html(html);

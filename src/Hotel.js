@@ -21,8 +21,6 @@ class Hotel {
     this.currentCustomer = this.customers.find(customer => {
       return customer.id === parseInt(id);
     });
-
-    console.log(this.currentCustomer)
   }
 
   findRoomsBooked(date) {
