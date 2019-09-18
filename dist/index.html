@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>Overlook</title>
+  <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header class="header-container">
+    <img class="logo" src="./images/logo.png" alt="overlook logo">
+    <div class="header-wrapper">
+      <div class="todays-date"></div>
+      <div class="current-customer"></div>
+    </div>
+  </header>
+  <div class="tabs">
+    <ul class="tabs-nav">
+      <li><a href="#main">Main</a></li>
+      <li><a href="#orders">Orders</a></li>
+      <li><a href="#rooms">Rooms</a></li>
+      <li><a href="#customer">Customer</a></li>
+    </ul>
+    <div class="tabs-stage">
+      <section id="main">
+        <div class="info">
+          <p>Rooms Avaliable:</p>
+          <p class="info--rooms-avaliable"></p>
+        </div>
+        <div class="info">
+          <p>Total Revenue:</p>
+          <p class="info--total-revenue"></p>
+        </div>
+        <div class="info">
+          <p>Percent Occupied:</p>
+          <p class="info--percent-occupied"></p>
+        </div>
+      </section>
+      <section id="orders">
+        <div class="order-container">
+          <p>Date: <input type="text" id="datepicker-orders"></p>
+          <div class="customer-order">
+            <p class="total-spent"></p>
+            <p class="spent-today"></p>
+          </div>
+        </div>
+        <div class="order-results">
+
+        </div>
+      </section>
+      <section id="rooms">
+        <p class="select-room-date">Date: <input type="text" id="datepicker-rooms"></p>
+        <div class="room-general-data">
+          <p class="popular-booking-date"></p>
+          <p class="most-rooms-avaliable-date"></p>
+        </div>
+        <div class="rooms-container">
+          <div class="avaliable-rooms-container">
+            <div class="avaliable-rooms">
+            </div>
+            <button disabled type="submit" class="button--reserve-booking">Reserve</button>
+          </div>
+          <div class="booking-container">
+            <div class="customer-bookings">
+            </div>
+            <div class="new-booking-container">
+              <button disabled type="submit" class="button--new-booking">New Booking</button>
+              <div class="room-type-menu">
+                <select class="room-type">
+                  <option value="" disabled selected>Room Types</option>
+                  <option value="single room">Single Room</option>
+                  <option value="residential suite">Residential Suite</option>
+                  <option value="suite">Suite</option>
+                  <option value="junior suite">Junior Suite</option>
+                </select>
+              </div>
+            </div>
+            <div class="room-service-container">
+              <button disabled type="submit" class="button--order-room-service">Order Room Service</button>
+              <div class="room-service-menu"></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <section id="customer">
+        <div class="input-container">
+          <div class="search-container">
+            <input type="text" class="input--search" placeholder="Who are you looking for?">
+            <button type="submit" class="button--search">
+              <img class="img img--search" src="./images/searching-magnifying-glass.svg" alt="search icon">
+            </button>
+          </div>
+          <div class="add-container">
+            <p>Add new customer:</p>
+            <input type="text" class="input--add first-name" placeholder="First Name">
+            <input type="text" class="input--add last-name" placeholder="Last Name">
+            <button disabled type="submit" class="button--add">
+              <img class="img img--add" src="./images/plus.svg" alt="plus icon">
+            </button>
+          </div>
+        </div>
+        <div class="search-results"></div>
+      </section>
+    </div>
+  </div>
+<script type="text/javascript" src="main.bundle.js"></script></body>
+
+</html>
