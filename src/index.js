@@ -14,25 +14,28 @@ import domUpdates from './domUpdates'
 import Hotel from '../src/Hotel.js';
 import Customer from '../src/Customer.js';
 import Booking from '../src/Booking.js';
+import {
+  WSA_E_NO_MORE
+} from 'constants';
 
 // Globals
 let hotel, booking, customer, today;
 
 // Fetch Data
 let apiRequest1 = fetch(
-    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users")
   .then(data => data.json())
 
 let apiRequest2 = fetch(
-    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms")
   .then(data => data.json())
 
 let apiRequest3 = fetch(
-    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
   .then(data => data.json())
 
 let apiRequest4 = fetch(
-    "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
+  "https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices")
   .then(data => data.json())
 
 var data = {
@@ -256,6 +259,7 @@ $('.booking-container').on('change', () => {
       domUpdates.addBookings(avaliableRooms, today);
     }
     domUpdates.enableSelectRoom();
+    domUpdates.toggleButton('.button--reserve-booking', true);
   }
 });
 
@@ -279,3 +283,28 @@ $('.avaliable-rooms').on('click', (event) => {
     domUpdates.selectRoom(event.target.parentElement);
   }
 });
+
+$('.button--reserve-booking').on('click', () => {
+  let reservedRooms = $('.select-room');
+
+  var roomNumbers = []
+  for (let i = 0; i < reservedRooms.length; i++) {
+    roomNumbers.push(parseInt(reservedRooms[i].dataset.roomNumber));
+  }
+
+  roomNumbers.forEach(room => {
+    hotel.bookings.push({
+      userID: customer.id,
+      date: today,
+      roomNumber: room
+    });
+    let bookings = customer.getCustomerSpecificData(hotel.bookings);
+    domUpdates.addCustomerBookings(bookings);
+
+    updateRooms(today);
+
+    domUpdates.toggleButton('.button--reserve-booking', true);
+    domUpdates.toggleRoomTypeMenu(false)
+    domUpdates.toggleButton('.button--new-booking', true);
+  })
+})
