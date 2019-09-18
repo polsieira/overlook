@@ -277,6 +277,8 @@ function createRoomServiceMenu() {
 
 $('.button--order-room-service').on('click', () => {
   domUpdates.toggleRoomServiceMenu(true);
+  domUpdates.toggleButton('.button--order-room-service', true);
+
 });
 
 $('.avaliable-rooms').on('click', (event) => {
@@ -313,3 +315,28 @@ $('.button--reserve-booking').on('click', () => {
     $('.room-service').prop('selectedIndex', 0);
   })
 })
+
+// Order room service
+$('.booking-container').on('change', () => {
+  if (event.target.classList[0] === 'room-service') {
+    hotel.roomServices.push({
+      userID: customer.id,
+      date: today,
+      food: event.target.value.split(',')[0],
+      totalCost: parseInt(event.target.value.split(',')[1])
+    })
+  }
+  $('.room-service').prop('selectedIndex', 0);
+  let filteredServices = hotel.roomServices.filter(service => {
+    return service.date.includes(today) && service.userID === customer.id;
+  });
+
+  domUpdates.addRoomServices(filteredServices, today);
+  domUpdates.toggleRoomServiceMenu(false);
+  domUpdates.toggleButton('.button--order-room-service', false);
+  let bills = customer.getCustomerSpecificData(hotel.roomServices);
+  domUpdates
+    .addCustomerSpending(
+      (customer.calculateTotalBill(bills)).toFixed(2),
+      (customer.calculateDailyBill(bills, today)).toFixed(2));
+});

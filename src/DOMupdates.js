@@ -199,12 +199,12 @@ export default {
     let items = Object.keys(roomServices);
 
     let html = `
-      <select multiple class="room-service">
+      <select class="room-service">
         <option value="" disabled selected>Menu</option>`;
 
     items.forEach(item => {
       html += `
-          <option value="${item}">
+          <option value="${[item, roomServices[item]]}">
             <span class="price">$${roomServices[item]}</span>
             <span class="menu-item">${item}</span>
           </option>`;
