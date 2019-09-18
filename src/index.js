@@ -245,6 +245,7 @@ $('.button--add').on('click', () => {
 
 //New booking
 $('.button--new-booking').on('click', () => {
+  domUpdates.toggleButton('.button--new-booking', true);
   domUpdates.toggleRoomTypeMenu(true);
 });
 
@@ -306,5 +307,9 @@ $('.button--reserve-booking').on('click', () => {
     domUpdates.toggleButton('.button--reserve-booking', true);
     domUpdates.toggleRoomTypeMenu(false)
     domUpdates.toggleButton('.button--new-booking', true);
+    domUpdates.toggleButton('.button--order-room-service', false);
+    updateMainTab(today);
+    $('.room-type').prop('selectedIndex', 0);
+    $('.room-service').prop('selectedIndex', 0);
   })
 })

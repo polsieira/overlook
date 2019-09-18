@@ -199,7 +199,7 @@ export default {
     let items = Object.keys(roomServices);
 
     let html = `
-      <select class="room-service">
+      <select multiple class="room-service">
         <option value="" disabled selected>Menu</option>`;
 
     items.forEach(item => {

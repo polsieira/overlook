@@ -58,7 +58,8 @@ class Hotel {
   }
 
   returnPercentageOfRoomsOccupied(date) {
-    return this.findRoomsBooked(date).length / this.rooms.length * 100;
+    return (this.findRoomsBooked(date).length / this.rooms.length * 100)
+      .toFixed(2);
   }
 }
 
