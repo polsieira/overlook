@@ -49,15 +49,7 @@ Click this link: https://polsieira.github.io/overlook/
 
 ## Screenshots
 
-<details>
-  <summary>Main</summary>
-       
-</details>
-
-
-## User Instruction
-
-
+![screencapture-polsieira-github-io-overlook-2019-10-09-18_51_13](https://user-images.githubusercontent.com/25589695/66662703-d9541200-ec38-11e9-9315-9242ce520459.png)
 
 ## Authors
 
